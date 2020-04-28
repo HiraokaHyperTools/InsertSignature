@@ -1,6 +1,7 @@
-overlay	chrome://messenger/content/msgHdrViewOverlay.xul	chrome://openattachmentbyextension/content/openattachmentbyextension.xul
-overlay chrome://messenger/content/messengercompose/messengercompose.xul	chrome://openattachmentbyextension/content/openattachmentbyextension.xul
-content	openattachmentbyextension	jar:chrome/openattachmentbyextension.jar!/content/openattachmentbyextension/
+content openattachmentbyextension content/
 
-locale	openattachmentbyextension	en-US	jar:chrome/openattachmentbyextension.jar!/locale/en-US/openattachmentbyextension/
-locale	openattachmentbyextension	it-IT	jar:chrome/openattachmentbyextension.jar!/locale/it-IT/openattachmentbyextension/
+overlay chrome://messenger/content/messenger.xul chrome://openattachmentbyextension/content/openattachmentbyextension.xul
+overlay chrome://messenger/content/messengercompose/messengercompose.xul chrome://openattachmentbyextension/content/openattachmentbyextension.xul
+
+locale openattachmentbyextension en locale/en/
+locale openattachmentbyextension ja locale/ja/

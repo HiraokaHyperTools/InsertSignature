@@ -1,0 +1,22 @@
+<!ENTITY options.title "Options">
+<!ENTITY options.label1 "Command to run with file extensions">
+<!ENTITY options.ext "Extension">
+<!ENTITY options.ext-no-period "Extension (without period)">
+<!ENTITY options.com "Command">
+<!ENTITY options.remove "Remove">
+<!ENTITY options.edit "Edit">
+<!ENTITY options.add "Add">
+<!ENTITY options-label2 "Extension '@@@' stands for files without extension">
+<!ENTITY options-label3 "Extension '###' stands for all files with numeric extensions">
+<!ENTITY options-label3a "Extension '***' stands for every file (for extensions which are not defined)">
+<!ENTITY options-label3b "Extension 'winmaildat' stands for 'winmail.dat' files">
+<!ENTITY options-label4 "Command arguments must be added with &#37;&#37; as separator">
+<!ENTITY options-label5 "Use this charset for executable arguments: ">
+<!ENTITY options.useCustDir "Temporary directory to open attachments:">
+<!ENTITY browse "Browse">
+<!ENTITY dialog.title "Command">
+<!ENTITY dialog.label1 "Use @@@ for files without extension">
+<!ENTITY dialog.label2 "Use ### for all files with numeric extension">
+<!ENTITY dialog.label2a "Use *** for every file">
+<!ENTITY dialog.label2b "Usare winmaildat for 'winmail.dat' files">
+<!ENTITY dialog.label3 "Use &#37;&#37; to add arguments to the command">
