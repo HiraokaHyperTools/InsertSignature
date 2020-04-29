@@ -13,10 +13,5 @@
   "author": "kenjiuno",
   "homepage_url": "https://github.com/HiraokaHyperTools/OpenAttachmentByExtension",
   "default_locale": "en",
-  "legacy": {
-    "options": {
-      "page": "chrome://openattachmentbyextension/content/options.xul",
-      "open_in_tab": false
-    }
-  }
+  "legacy": true
 }

@@ -304,5 +304,6 @@ function OABEdelayedActions(pr, args, delOnExit, file, fileSize, checking) {
   }
 }
 
-
-
+function OABEshowOptions() {
+  window.openDialog("chrome://openattachmentbyextension/content/options.xul", "", "chrome,modal,centerscreen", null);
+}
