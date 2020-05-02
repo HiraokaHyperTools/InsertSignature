@@ -94,10 +94,10 @@ function RemoveItem() {
 
 function AppendNewItem(label1, label2) {
   var list = document.getElementById("list");
-  var item = document.createElement("treeitem");
-  var row = document.createElement("treerow");
-  var cell1 = document.createElement("treecell");
-  var cell2 = document.createElement("treecell");
+  var item = document.createXULElement("treeitem");
+  var row = document.createXULElement("treerow");
+  var cell1 = document.createXULElement("treecell");
+  var cell2 = document.createXULElement("treecell");
   cell1.setAttribute("label", label1);
   cell2.setAttribute("label", label2);
   row.appendChild(cell1);
