@@ -2,12 +2,13 @@
 <!DOCTYPE overlay SYSTEM "chrome://openattachmentbyextension/locale/openattach.dtd">
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	    	xmlns:html="http://www.w3.org/1999/xhtml"
 	    	title="&dialog.title;">
 		
 <script type="application/x-javascript" src="chrome://openattachmentbyextension/content/newActionDialog.js" />
 <hbox>
 	<label value="&options.ext-no-period;: " />
-	<textbox id="ext" />
+	<html:input id="ext" />
 </hbox>
 <vbox id="extNotes">
 	<spacer height="5px"/>
@@ -19,7 +20,7 @@
 </vbox>
 <hbox>
 	<label value="&options.com;: " />
-	<textbox id="com" width="400px" />
+	<html:input id="com" style="width:400px;" />
 	<button label="&browse;" oncommand="pickFile(this)" />
 </hbox>
 <spacer height="5px"/>

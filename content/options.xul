@@ -2,6 +2,7 @@
 <!DOCTYPE overlay SYSTEM "chrome://openattachmentbyextension/locale/openattach.dtd">
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+		xmlns:html="http://www.w3.org/1999/xhtml"
 		height="450px"
 		width="550px"
 		title="&options.title;"
@@ -43,14 +44,14 @@
 	<checkbox id="CTDcheck" label="&options.useCustDir;" />
 </hbox>
 <hbox>
-	<textbox flex="1" id ="customTempDirPath" />
+	<html:input flex="1" id ="customTempDirPath" />
 	<button label="&browse;" oncommand="pickDir(this)" />
 </hbox>
 </groupbox>
 <groupbox>
 <hbox align="center">
 	<checkbox id="charsetBox" label="&options-label5;" />
-	<textbox id ="charset" size="15" />
+	<html:input id="charset" style="width:15ex;" />
 </hbox>
 </groupbox>
 
