@@ -1,7 +1,0 @@
-content openattachmentbyextension content/
-
-overlay chrome://messenger/content/messenger.xul chrome://openattachmentbyextension/content/openattachmentbyextension.xul
-overlay chrome://messenger/content/messengercompose/messengercompose.xul chrome://openattachmentbyextension/content/openattachmentbyextension.xul
-
-locale openattachmentbyextension en locale/en/
-locale openattachmentbyextension ja locale/ja/
