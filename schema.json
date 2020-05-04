@@ -5,15 +5,32 @@
       {
         "name": "openAttachmentFromActiveMail",
         "type": "function",
-        "description": "Open attachment from current active message.",
+        "description": "Open attachment(s) from current active message.",
         "async": true,
         "parameters": [
           {
-            "name": "name",
-            "type": "string",
-            "description": "fileName to find"
+            "name": "filter",
+            "type": "object",
+            "description": "Attachment files filtering",
+            "properties": {
+              "name": {
+                "type": "string",
+                "optional": true
+              },
+              "partID": {
+                "type": "string",
+                "optional": true
+              }
+            }
           }
         ]
+      },
+      {
+        "name": "listAttachmentFromActiveMail",
+        "type": "function",
+        "description": "Enumerate attachment(s) from current active message.",
+        "async": true,
+        "parameters": []
       }
     ]
   }
