@@ -15,13 +15,13 @@
     const li = document.createElement("li")
     {
       const anchor = document.createElement("a")
-      anchor.href = "https://yahoo.co.jp/"
+      anchor.href = "about:blank" // need a valid url in order to activate anchor's link
       anchor.textContent = attachment.name
       anchor.addEventListener("click", () => {
         browser.oabeApi.openAttachmentFromActiveMail({
           name: attachment.name
         })
-        return false
+        return false // won't open about:blank
       })
       li.appendChild(anchor)
     }
