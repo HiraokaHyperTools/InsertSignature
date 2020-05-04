@@ -18,20 +18,24 @@
   },
   "author": "kenjiuno",
   "homepage_url": "https://github.com/HiraokaHyperTools/OpenAttachmentByExtension",
-  "default_locale": "en",
+  "default_locale": "en_US",
   "permissions": [
     "messagesRead"
   ],
   "message_display_action": {
-    "default_icon": "icons/16.png",
-    "default_title": "default_title"
-  },
-  "background": {
-    "page": "background.html"
+    "default_icon": {
+      "64": "icons/64.png",
+      "48": "icons/48.png",
+      "32": "icons/32.png",
+      "24": "icons/24.png",
+      "16": "icons/16.png"
+    },
+    "default_popup": "open-attach.html",
+    "default_title": "OpenAttach..."
   },
   "experiment_apis": {
     "oabeApi": {
-      "schema": "schema.json",
+      "schema": "api/schema.json",
       "parent": {
         "scopes": [
           "addon_parent"
@@ -41,7 +45,7 @@
             "oabeApi"
           ]
         ],
-        "script": "implementation.js"
+        "script": "api/implementation.js"
       }
     }
   }
