@@ -5,6 +5,12 @@
   ul.querySelectorAll("li").forEach(it => it.remove())
 
   const list = await browser.oabeApi.listAttachmentFromActiveMail()
+  if (list.length === 0) {
+    const li = document.createElement("li")
+    li.textContent = "No attachment observed in active message."
+    ul.appendChild(li)
+    return
+  }
   for (let attachment of list) {
     const li = document.createElement("li")
     {
