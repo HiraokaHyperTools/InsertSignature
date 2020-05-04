@@ -1,0 +1,20 @@
+[
+  {
+    "namespace": "oabeApi",
+    "functions": [
+      {
+        "name": "openAttachmentFromActiveMail",
+        "type": "function",
+        "description": "Open attachment from current active message.",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "string",
+            "description": "fileName to find"
+          }
+        ]
+      }
+    ]
+  }
+]

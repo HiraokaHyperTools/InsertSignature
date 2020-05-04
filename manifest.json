@@ -6,8 +6,7 @@
   "applications": {
     "gecko": {
       "id": "OpenAttachmentByExtension@digitaldolphins.jp",
-      "strict_min_version": "68.6.0",
-      "strict_max_version": "72.0"
+      "strict_min_version": "68.6.0"
     }
   },
   "icons": {
@@ -20,5 +19,30 @@
   "author": "kenjiuno",
   "homepage_url": "https://github.com/HiraokaHyperTools/OpenAttachmentByExtension",
   "default_locale": "en",
-  "legacy": true
+  "permissions": [
+    "messagesRead"
+  ],
+  "message_display_action": {
+    "default_icon": "icons/16.png",
+    "default_title": "default_title"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "experiment_apis": {
+    "oabeApi": {
+      "schema": "schema.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "paths": [
+          [
+            "oabeApi"
+          ]
+        ],
+        "script": "implementation.js"
+      }
+    }
+  }
 }
