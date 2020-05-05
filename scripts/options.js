@@ -16,13 +16,18 @@ const extensionEdit = $('#extensionEdit')
 const commandEdit = $('#commandEdit')
 const workDirEdit = $('#workDirEdit')
 const extensionsListView = $('#extensionsListView')
+const useWorkDirCheck = $('#useWorkDirCheck')
 
 $('#page-workdir').on('pagebeforeshow', () => {
   workDirEdit.val(pref.get('custom_temp_dir'))
+  useWorkDirCheck
+    .prop("checked", pref.get('use_custom_temp_dir') === "1")
+    .flipswitch('refresh')
 })
 
 $('#saveWorkDirBtn').on('click', () => {
   pref.set('custom_temp_dir', workDirEdit.val())
+  pref.set('use_custom_temp_dir', useWorkDirCheck.prop("checked") ? "1" : "0")
   $.mobile.navigate('#page-top')
 })
 
