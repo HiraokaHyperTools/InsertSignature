@@ -2,12 +2,8 @@
 
 // `$` is: very old `jQuery` 1.12.4
 
-// prefs:
-// custom_temp_dir
-// use_custom_temp_dir
-// extension.###
-
 import * as pref from './pref.js'
+import pref2 from './pref2.js'
 import * as utils from './utils.js'
 
 let onSaveExtensionDetail
@@ -20,15 +16,15 @@ const extensionsListView = $('#extensionsListView')
 const useWorkDirCheck = $('#useWorkDirCheck')
 
 $('#page-workdir').on('pagebeforeshow', () => {
-  workDirEdit.val(pref.get('custom_temp_dir'))
+  workDirEdit.val(pref2.customTempDir)
   useWorkDirCheck
-    .prop("checked", pref.get('use_custom_temp_dir') === "1")
+    .prop("checked", pref2.useCustomTempDir)
     .flipswitch('refresh')
 })
 
 $('#saveWorkDirBtn').on('click', () => {
-  pref.set('custom_temp_dir', workDirEdit.val())
-  pref.set('use_custom_temp_dir', useWorkDirCheck.prop("checked") ? "1" : "0")
+  pref2.customTempDir = workDirEdit.val()
+  pref2.useCustomTempDir = useWorkDirCheck.prop("checked")
   $.mobile.navigate('#page-top')
 })
 
@@ -58,11 +54,11 @@ $('#page-extensions').on('pagebeforeshow', () => {
                     commandEdit.val(command)
 
                     onSaveExtensionDetail = () => {
-                      pref.set(key, commandEdit.val())
+                      pref2.setExtensionCommand(extension, commandEdit.val())
                       return true
                     }
                     onRemoveThisExtensionDetail = () => {
-                      pref.remove(key)
+                      pref2.removeExtensionCommand(extension)
                       return true
                     }
                   })
@@ -88,7 +84,7 @@ $('#gotoAddNewExtensionBtn').on('click', () => {
       extensionEdit.focus()
       return false
     }
-    pref.set(`extension.${newExtension}`, commandEdit.val())
+    pref2.setExtensionCommand(newExtension, commandEdit.val())
     return true
   }
   onRemoveThisExtensionDetail = () => true
@@ -106,4 +102,4 @@ $('#removeThisExtensionBtn').on('click', () => {
   return onRemoveThisExtensionDetail()
 })
 
-$('#topLoadingPanel').hide()
+$('#topLoadingPanel').hide() // if errors are in above scripts, loading won't disappear.
