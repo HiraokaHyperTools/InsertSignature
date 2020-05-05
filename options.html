@@ -19,7 +19,12 @@
     </div><!-- /header -->
 
     <div role="main" class="ui-content">
-      Select option going to customize:
+      <div class="ui-body ui-body-a ui-corner-all" id="topLoadingPanel">
+        <h3>Loading</h3>
+        <p>Please wait.</p>
+      </div>
+
+      <p>Select option going to customize:</p>
       <p><a href="#page-workdir" class="ui-btn ui-shadow ui-corner-all">Temporary directory to open attachments</a></p>
       <p><a href="#page-extensions" class="ui-btn ui-shadow ui-corner-all">Command to run with extensions</a></p>
     </div><!-- /content -->
@@ -121,11 +126,7 @@
 
   <script src="scripts/jquery-1.12.4.js"></script>
   <script src="scripts/jquery.mobile-1.4.5.js"></script>
-  <script src="scripts/pimple.js"></script>
-  <script src="scripts/declare-pimple.js"></script>
-  <script src="scripts/pimple-module-pref.js"></script>
-  <script src="scripts/pimple-module-utils.js"></script>
-  <script src="scripts/options.js"></script>
+  <script src="js/options.js" type="module"></script>
 </body>
 
 </html>

@@ -7,7 +7,8 @@
 // use_custom_temp_dir
 // extension.###
 
-const { pref, utils } = pimple
+import * as pref from './pref.js'
+import * as utils from './utils.js'
 
 let onSaveExtensionDetail
 let onRemoveThisExtensionDetail
@@ -104,3 +105,5 @@ $('#saveExtensionDetailBtn').on('click', () => {
 $('#removeThisExtensionBtn').on('click', () => {
   return onRemoveThisExtensionDetail()
 })
+
+$('#topLoadingPanel').hide()

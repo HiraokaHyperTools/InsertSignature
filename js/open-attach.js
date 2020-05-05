@@ -1,4 +1,6 @@
-// include from open-attach.html
+// called from open-attach.html
+
+
 
 (async function () {
   const ul = document.querySelector("#attachment-list")
