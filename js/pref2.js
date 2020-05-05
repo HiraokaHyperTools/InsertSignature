@@ -7,6 +7,10 @@
 
 import * as pref from './pref.js'
 
+function normalizeExtension(ext) {
+  return (ext || '').toLowerCase()
+}
+
 export default {
   get customTempDir() {
     return pref.get('custom_temp_dir')
@@ -23,9 +27,12 @@ export default {
   },
 
   setExtensionCommand(extension, command) {
-    pref.set(`extension.${extension}`, command)
+    pref.set(`extension.${normalizeExtension(extension)}`, command)
   },
   removeExtensionCommand(extension) {
-    pref.remove(`extension.${extension}`)
+    pref.remove(`extension.${normalizeExtension(extension)}`)
+  },
+  getExtensionCommand(extension) {
+    return pref.get(`extension.${normalizeExtension(extension)}`)
   },
 }
