@@ -4,6 +4,8 @@ var oabeApi = class extends ExtensionCommon.ExtensionAPI {
     const { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm")
     const newProcess = () => Components.classes["@mozilla.org/process/util;1"]
       .createInstance(Components.interfaces.nsIProcess)
+    const newFilePicker = () => Components.classes["@mozilla.org/filepicker;1"]
+      .createInstance(Components.interfaces.nsIFilePicker)
 
     const reduceAttachmentInfo = (attachment) => ({
       name: attachment.name,
@@ -17,11 +19,26 @@ var oabeApi = class extends ExtensionCommon.ExtensionAPI {
       return currentAttachment || currentAttachments
     }
 
+    const buildLaunchSet = (programAsString, attachmentFile, parameterArray) => {
+      const launchSet = {}
+
+      if (programAsString) {
+        launchSet.program = new FileUtils.File(programAsString)
+        launchSet.parameters = (parameterArray || []).concat([attachmentFile.path])
+      }
+      else {
+        launchSet.program = attachmentFile
+        launchSet.parameters = parameterArray || []
+      }
+
+      return launchSet
+    }
+
     return {
       oabeApi: {
         // test:
         // await browser.oabeApi.openAttachmentFromActiveMail({name:"TB_1.dxf"})
-        async openAttachmentFromActiveMail(filters) {
+        async openAttachmentFromActiveMail(filters, options) {
           const { messenger, setTimeout } = Services.wm.getMostRecentWindow("mail:3pane")
           const sleepAsync = (milli) => {
             return new Promise(resolve => {
@@ -29,14 +46,20 @@ var oabeApi = class extends ExtensionCommon.ExtensionAPI {
             })
           }
 
-          const { name, partID } = filters
+          const { name, partID } = filters || {}
           const hits = getAttachmentsInActiveMail()
             .filter(it => true
               && (!name || it.name === name)
               && (!partID || it.partID === partID)
             )
 
-          const tmpDir = FileUtils.getDir('TmpD', [])
+          const { workDir, program, parameters } = options || {}
+
+          const saveToDir = (
+            (workDir)
+              ? new FileUtils.File(workDir)
+              : FileUtils.getDir('TmpD', [])
+          )
 
           const result = []
 
@@ -49,18 +72,23 @@ var oabeApi = class extends ExtensionCommon.ExtensionAPI {
               attachment.url,
               encodeURIComponent(saveFileName),
               sourceUri,
-              tmpDir
+              saveToDir
             )
 
             while (!tempfile.exists() || tempfile.fileSize !== attachment.size) {
               await sleepAsync(500)
             }
 
+            const launchSet = buildLaunchSet(program, tempfile, parameters)
+
+            //console.info(launchSet.program.path, launchSet.parameters)
+
             const process = newProcess()
-            process.init(tempfile)
-            process.run(false, [], 0)
+            process.init(launchSet.program)
+            process.run(false, launchSet.parameters, launchSet.parameters.length)
 
             result.push(Object.assign(
+              Object.create(null), // avoid prototype pollution
               reduceAttachmentInfo(attachment),
               {
                 tempPath: `${tempfile.path}`,
@@ -77,6 +105,48 @@ var oabeApi = class extends ExtensionCommon.ExtensionAPI {
         async listAttachmentFromActiveMail() {
           return getAttachmentsInActiveMail()
             .map(it => reduceAttachmentInfo(it))
+        },
+
+        // test:
+        // await browser.oabeApi.pickFile()
+        async pickFile() {
+          const nsIFilePicker = Components.interfaces.nsIFilePicker;
+          const fp = newFilePicker()
+          const { window } = Services.wm.getMostRecentWindow("mail:3pane")
+          fp.init(window, "OpenAttachmentByExtension", nsIFilePicker.modeOpen)
+          fp.appendFilters(nsIFilePicker.filterAll)
+          const asyncOpen = new Promise((resolve, reject) => {
+            fp.open(function (rv) {
+              if (rv == nsIFilePicker.returnOK) {
+                resolve(fp.file.path)
+              }
+              else {
+                reject(new Error("User cancel"))
+              }
+            })
+          })
+          return await asyncOpen
+        },
+
+        // test:
+        // await browser.oabeApi.pickDir()
+        async pickDir() {
+          const nsIFilePicker = Components.interfaces.nsIFilePicker;
+          const fp = newFilePicker()
+          const { window } = Services.wm.getMostRecentWindow("mail:3pane")
+          fp.init(window, "OpenAttachmentByExtension", nsIFilePicker.modeGetFolder)
+          fp.appendFilters(nsIFilePicker.filterAll)
+          const asyncOpen = new Promise((resolve, reject) => {
+            fp.open(function (rv) {
+              if (rv == nsIFilePicker.returnOK) {
+                resolve(fp.file.path)
+              }
+              else {
+                reject(new Error("User cancel"))
+              }
+            })
+          })
+          return await asyncOpen
         },
       }
     }

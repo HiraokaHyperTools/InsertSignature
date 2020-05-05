@@ -1,4 +1,7 @@
-// include from open-attach.html
+// called from open-attach.html
+
+import pref2 from './pref2.js'
+import * as utils from './utils.js'
 
 (async function () {
   const ul = document.querySelector("#attachment-list")
@@ -18,9 +21,17 @@
       anchor.href = "about:blank" // need a valid url in order to activate anchor's link
       anchor.textContent = attachment.name
       anchor.addEventListener("click", () => {
-        browser.oabeApi.openAttachmentFromActiveMail({
-          name: attachment.name
-        })
+        const launcherSet = utils.buildLauncherSetFromFromFileName(attachment.name)
+        browser.oabeApi.openAttachmentFromActiveMail(
+          {
+            name: attachment.name
+          },
+          {
+            workDir: pref2.customTempDir,
+            program: launcherSet.program,
+            parameters: launcherSet.parameters,
+          }
+        )
         return false // won't open about:blank
       })
       li.appendChild(anchor)
