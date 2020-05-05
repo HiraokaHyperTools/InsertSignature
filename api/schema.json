@@ -31,6 +31,20 @@
         "description": "Enumerate attachment(s) from current active message.",
         "async": true,
         "parameters": []
+      },
+      {
+        "name": "pickFile",
+        "type": "function",
+        "description": "Pick up a file from local filesystem.",
+        "async": true,
+        "parameters": []
+      },
+      {
+        "name": "pickDir",
+        "type": "function",
+        "description": "Pick up a directory from local filesystem.",
+        "async": true,
+        "parameters": []
       }
     ]
   }

@@ -26,6 +26,10 @@ $('#saveWorkDirBtn').on('click', () => {
   $.mobile.navigate('#page-top')
 })
 
+$('#refWorkDirBtn').on('click', async () => {
+  workDirEdit.val(await browser.oabeApi.pickDir())
+})
+
 $('#page-extensions').on('pagebeforeshow', () => {
   extensionsListView
     .empty()
@@ -82,6 +86,10 @@ $('#gotoAddNewExtensionBtn').on('click', () => {
     return true
   }
   onRemoveThisExtensionDetail = () => true
+})
+
+$('#refCommandBtn').on('click', async () => {
+  commandEdit.val(await browser.oabeApi.pickFile())
 })
 
 $('#saveExtensionDetailBtn').on('click', () => {

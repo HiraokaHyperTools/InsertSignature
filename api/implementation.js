@@ -4,6 +4,8 @@ var oabeApi = class extends ExtensionCommon.ExtensionAPI {
     const { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm")
     const newProcess = () => Components.classes["@mozilla.org/process/util;1"]
       .createInstance(Components.interfaces.nsIProcess)
+    const newFilePicker = () => Components.classes["@mozilla.org/filepicker;1"]
+      .createInstance(Components.interfaces.nsIFilePicker)
 
     const reduceAttachmentInfo = (attachment) => ({
       name: attachment.name,
@@ -77,6 +79,48 @@ var oabeApi = class extends ExtensionCommon.ExtensionAPI {
         async listAttachmentFromActiveMail() {
           return getAttachmentsInActiveMail()
             .map(it => reduceAttachmentInfo(it))
+        },
+
+        // test:
+        // await browser.oabeApi.pickFile()
+        async pickFile() {
+          const nsIFilePicker = Components.interfaces.nsIFilePicker;
+          const fp = newFilePicker()
+          const { window } = Services.wm.getMostRecentWindow("mail:3pane")
+          fp.init(window, "OpenAttachmentByExtension", nsIFilePicker.modeOpen)
+          fp.appendFilters(nsIFilePicker.filterAll)
+          const asyncOpen = new Promise((resolve, reject) => {
+            fp.open(function (rv) {
+              if (rv == nsIFilePicker.returnOK) {
+                resolve(fp.file.path)
+              }
+              else {
+                reject(new Error("User cancel"))
+              }
+            })
+          })
+          return await asyncOpen
+        },
+
+        // test:
+        // await browser.oabeApi.pickDir()
+        async pickDir() {
+          const nsIFilePicker = Components.interfaces.nsIFilePicker;
+          const fp = newFilePicker()
+          const { window } = Services.wm.getMostRecentWindow("mail:3pane")
+          fp.init(window, "OpenAttachmentByExtension", nsIFilePicker.modeGetFolder)
+          fp.appendFilters(nsIFilePicker.filterAll)
+          const asyncOpen = new Promise((resolve, reject) => {
+            fp.open(function (rv) {
+              if (rv == nsIFilePicker.returnOK) {
+                resolve(fp.file.path)
+              }
+              else {
+                reject(new Error("User cancel"))
+              }
+            })
+          })
+          return await asyncOpen
         },
       }
     }
