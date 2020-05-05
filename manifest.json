@@ -33,6 +33,10 @@
     "default_popup": "open-attach.html",
     "default_title": "OpenAttach..."
   },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "OpenAttach..."
+  },
   "experiment_apis": {
     "oabeApi": {
       "schema": "api/schema.json",
