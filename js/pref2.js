@@ -7,32 +7,18 @@
 
 import * as pref from './pref.js'
 
-function normalizeExtension(ext) {
-  return (ext || '').toLowerCase()
+function normalizeKey(ext) {
+  return (ext || '').trim()
 }
 
 export default {
-  get customTempDir() {
-    return pref.get('custom_temp_dir')
+  setTemplate(extension, command) {
+    pref.set(`template.${normalizeKey(extension)}`, command)
   },
-  set customTempDir(val) {
-    return pref.set('custom_temp_dir', val)
+  removeTemplate(extension) {
+    pref.remove(`template.${normalizeKey(extension)}`)
   },
-
-  get useCustomTempDir() {
-    return pref.get('use_custom_temp_dir') === "1"
-  },
-  set useCustomTempDir(val) {
-    pref.set('use_custom_temp_dir', val ? "1" : "0")
-  },
-
-  setExtensionCommand(extension, command) {
-    pref.set(`extension.${normalizeExtension(extension)}`, command)
-  },
-  removeExtensionCommand(extension) {
-    pref.remove(`extension.${normalizeExtension(extension)}`)
-  },
-  getExtensionCommand(extension) {
-    return pref.get(`extension.${normalizeExtension(extension)}`)
+  getTemplate(extension) {
+    return pref.get(`template.${normalizeKey(extension)}`)
   },
 }

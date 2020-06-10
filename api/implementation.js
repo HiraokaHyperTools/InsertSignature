@@ -1,152 +1,79 @@
-var oabeApi = class extends ExtensionCommon.ExtensionAPI {
+var insertSignatureApi = class extends ExtensionCommon.ExtensionAPI {
   getAPI(context) {
-    const { FileUtils } = ChromeUtils.import("resource://gre/modules/FileUtils.jsm")
     const { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm")
-    const newProcess = () => Components.classes["@mozilla.org/process/util;1"]
-      .createInstance(Components.interfaces.nsIProcess)
-    const newFilePicker = () => Components.classes["@mozilla.org/filepicker;1"]
-      .createInstance(Components.interfaces.nsIFilePicker)
+    // See: https://developer.mozilla.org/en/docs/Mozilla/Tech/XPCOM/Accessing_the_Windows_Registry_Using_XPCOM
 
-    const reduceAttachmentInfo = (attachment) => ({
-      name: attachment.name,
-      partID: attachment.partID,
-      size: attachment.size,
-      contentType: attachment.contentType,
-    })
+    const wrkGenerator = () => (
+      Components.classes["@mozilla.org/windows-registry-key;1"]
+        .createInstance(Components.interfaces.nsIWindowsRegKey)
+    )
 
-    const getAttachmentsInActiveMail = () => {
-      const { currentAttachment, currentAttachments } = Services.wm.getMostRecentWindow("mail:3pane")
-      return currentAttachment || currentAttachments
+    const getStringValueOrNull = (key, valueName) => {
+      try {
+        return key.readStringValue(valueName)
+      }
+      catch (ex) {
+        return null
+      }
     }
 
-    const buildLaunchSet = (programAsString, attachmentFile, parameterArray) => {
-      const launchSet = {}
-
-      if (programAsString) {
-        launchSet.program = new FileUtils.File(programAsString)
-        launchSet.parameters = (parameterArray || []).concat([attachmentFile.path])
+    const getIntValueOrNull = (key, valueName) => {
+      try {
+        return key.readIntValue(valueName)
       }
-      else {
-        launchSet.program = attachmentFile
-        launchSet.parameters = parameterArray || []
+      catch (ex) {
+        return null
       }
-
-      return launchSet
     }
 
     return {
-      oabeApi: {
+      insertSignatureApi: {
         // test:
-        // await browser.oabeApi.openAttachmentFromActiveMail({name:"TB_1.dxf"})
-        async openAttachmentFromActiveMail(filters, options) {
-          const { messenger, setTimeout } = Services.wm.getMostRecentWindow("mail:3pane")
-          const sleepAsync = (milli) => {
-            return new Promise(resolve => {
-              setTimeout(() => resolve(), milli)
-            })
-          }
+        // await browser.insertSignatureApi.insertTextAtCurrentEditor({text:"hello"})
+        async insertTextAtCurrentEditor(options) {
+          const msgcompose = Services.wm.getMostRecentWindow("msgcompose")
+          const editor = msgcompose.GetCurrentEditor()
 
-          const { name, partID } = filters || {}
-          const hits = getAttachmentsInActiveMail()
-            .filter(it => true
-              && (!name || it.name === name)
-              && (!partID || it.partID === partID)
+          editor.insertText(options.text)
+
+          return {}
+        },
+        // test:
+        // await browser.insertSignatureApi.importSignatureFromWindowsLiveMail()
+        async importSignatureFromWindowsLiveMail() {
+          const wrk = wrkGenerator()
+          try {
+            wrk.open(
+              wrk.ROOT_KEY_CURRENT_USER,
+              "Software\\Microsoft\\Windows Live Mail\\signatures",
+              wrk.ACCESS_READ
             )
-
-          const { workDir, program, parameters } = options || {}
-
-          const saveToDir = (
-            (workDir)
-              ? new FileUtils.File(workDir)
-              : FileUtils.getDir('TmpD', [])
-          )
-
+          }
+          catch (ex) {
+            // no such a registry?
+            return []
+          }
           const result = []
-
-          for (let attachment of hits) {
-            const sourceUri = attachment.uri ? attachment.uri : attachment.messageUri
-            const saveFileName = attachment.displayName ? attachment.displayName : attachment.name
-
-            const tempfile = messenger.saveAttachmentToFolder(
-              attachment.contentType,
-              attachment.url,
-              encodeURIComponent(saveFileName),
-              sourceUri,
-              saveToDir
-            )
-
-            while (!tempfile.exists() || tempfile.fileSize !== attachment.size) {
-              await sleepAsync(500)
+          for (let i = 0; i < wrk.childCount; i++) {
+            const childName = wrk.getChildName(i)
+            const subkey = wrk.openChild(childName, wrk.ACCESS_READ)
+            if (subkey) {
+              const name = getStringValueOrNull(subkey, "name")
+              const type = getIntValueOrNull(subkey, "type")
+              if (type === 1) {
+                const text = getStringValueOrNull(subkey, "text")
+                if (text && text.length >= 1) {
+                  result.push({
+                    name,
+                    text,
+                  })
+                }
+              }
+              subkey.close()
             }
-
-            const launchSet = buildLaunchSet(program, tempfile, parameters)
-
-            //console.info(launchSet.program.path, launchSet.parameters)
-
-            const process = newProcess()
-            process.init(launchSet.program)
-            process.run(false, launchSet.parameters, launchSet.parameters.length)
-
-            result.push(Object.assign(
-              Object.create(null), // avoid prototype pollution
-              reduceAttachmentInfo(attachment),
-              {
-                tempPath: `${tempfile.path}`,
-                status: "launched"
-              }
-            ))
           }
-
+          wrk.close()
           return result
-        },
-
-        // test:
-        // await browser.oabeApi.listAttachmentFromActiveMail()
-        async listAttachmentFromActiveMail() {
-          return getAttachmentsInActiveMail()
-            .map(it => reduceAttachmentInfo(it))
-        },
-
-        // test:
-        // await browser.oabeApi.pickFile()
-        async pickFile() {
-          const nsIFilePicker = Components.interfaces.nsIFilePicker;
-          const fp = newFilePicker()
-          const { window } = Services.wm.getMostRecentWindow("mail:3pane")
-          fp.init(window, "OpenAttachmentByExtension", nsIFilePicker.modeOpen)
-          fp.appendFilters(nsIFilePicker.filterAll)
-          const asyncOpen = new Promise((resolve, reject) => {
-            fp.open(function (rv) {
-              if (rv == nsIFilePicker.returnOK) {
-                resolve(fp.file.path)
-              }
-              else {
-                reject(new Error("User cancel"))
-              }
-            })
-          })
-          return await asyncOpen
-        },
-
-        // test:
-        // await browser.oabeApi.pickDir()
-        async pickDir() {
-          const nsIFilePicker = Components.interfaces.nsIFilePicker;
-          const fp = newFilePicker()
-          const { window } = Services.wm.getMostRecentWindow("mail:3pane")
-          fp.init(window, "OpenAttachmentByExtension", nsIFilePicker.modeGetFolder)
-          fp.appendFilters(nsIFilePicker.filterAll)
-          const asyncOpen = new Promise((resolve, reject) => {
-            fp.open(function (rv) {
-              if (rv == nsIFilePicker.returnOK) {
-                resolve(fp.file.path)
-              }
-              else {
-                reject(new Error("User cancel"))
-              }
-            })
-          })
-          return await asyncOpen
         },
       }
     }

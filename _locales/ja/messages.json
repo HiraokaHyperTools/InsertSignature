@@ -1,8 +1,62 @@
 {
   "extensionName": {
-    "message": "OpenAttachmentByExtension"
+    "message": "InsertSignature"
   },
   "extensionDescription": {
-    "message": "添付ファイルの拡張子に対して、プログラムの関連付けを可能にします"
+    "message": "署名を挿入します"
+  },
+  "actionTitle": {
+    "message": "署名"
+  },
+  "Signature inserter": {
+    "message": "署名を挿入"
+  },
+  "Edit signatures": {
+    "message": "署名を作成・編集"
+  },
+  "Click signature to insert:": {
+    "message": "署名をクリックして挿入:"
+  },
+  "Page Footer": {
+    "message": "ページ フッター"
+  },
+  "Click signature to edit": {
+    "message": "署名をクリックして編集"
+  },
+  "Back": {
+    "message": "戻る"
+  },
+  "Add": {
+    "message": "追加"
+  },
+  "Signature detail": {
+    "message": "署名の詳細"
+  },
+  "Save": {
+    "message": "保存"
+  },
+  "Label:": {
+    "message": "名称:"
+  },
+  "Plain text to be inserted:": {
+    "message": "署名の内容:"
+  },
+  "Other operations:": {
+    "message": "他の操作:"
+  },
+  "Remove this": {
+    "message": "削除"
+  },
+  "Import and overwrite from Windows Live Mail": {
+    "message": "Windows Live Mail から上書きインポート"
+  },
+  "newSignatureLabel": {
+    "message": "署名 #$NUM$",
+    "placeholders": {
+      "num": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
   }
 }

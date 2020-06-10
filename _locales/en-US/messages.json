@@ -1,8 +1,20 @@
 {
   "extensionName": {
-    "message": "OpenAttachmentByExtension"
+    "message": "InsertSignature"
   },
   "extensionDescription": {
-    "message": "Open the attachment by extension and not by mimetype"
+    "message": "Insert signature"
+  },
+  "actionTitle": {
+    "message": "Insert"
+  },
+  "newSignatureLabel": {
+    "message": "Signature #$NUM$",
+    "placeholders": {
+      "num": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
   }
 }
