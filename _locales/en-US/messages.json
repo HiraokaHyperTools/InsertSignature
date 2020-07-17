@@ -16,5 +16,14 @@
         "example": "1"
       }
     }
+  },
+  "importedNumPrefs": {
+    "message": "Imported $NUM$ preferences!",
+    "placeholders": {
+      "num": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
   }
 }

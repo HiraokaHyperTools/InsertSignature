@@ -1,10 +1,5 @@
 // pref2 module
 
-// prefs:
-// custom_temp_dir
-// use_custom_temp_dir
-// extension.###
-
 import * as pref from './pref.js'
 
 function normalizeKey(ext) {

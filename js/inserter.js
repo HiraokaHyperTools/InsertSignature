@@ -11,6 +11,15 @@ const titleEdit = $('#titleEdit')
 const templateEdit = $('#templateEdit')
 const templatesListView = $('#templatesListView')
 const templatesInserterListView = $('#templatesInserterListView')
+const exportData = $('#exportData')
+const copyExportedData = $('#copyExportedData')
+const exportedDataCopied = $('#exportedDataCopied')
+const pasteDataFromClipboard = $('#pasteDataFromClipboard')
+const importData = $('#importData')
+const proceedDataImport = $('#proceedDataImport')
+const imported = $('#imported')
+const importErrorPanel = $('#importErrorPanel')
+const importErrorMessage = $('#importErrorMessage')
 
 function refreshTemplatesInserterListView() {
   templatesInserterListView
@@ -130,10 +139,13 @@ $('#removeThisTemplateBtn').on('click', () => {
 
 $('#topLoadingPanel').hide() // if errors are in above scripts, loading won't disappear.
 
+const matchContinousSpaces = /\s+/g
+
 $('[data-trans]').each((index, element) => {
   const elementSelector = $(element)
   if (elementSelector.data("trans") === "text") {
-    const message = browser.i18n.getMessage(elementSelector.text().trim())
+    const original = elementSelector.text().trim().replace(matchContinousSpaces, ' ')
+    const message = browser.i18n.getMessage(original)
     if (message) {
       elementSelector.text(message)
     }
@@ -147,4 +159,61 @@ $("#importFromWindowsLiveMailBtn").on('click', async () => {
   }
 
   refreshTemplatesListView()
+})
+
+$('#page-exporter').on('pagebeforeshow', () => {
+  exportedDataCopied.hide()
+
+  const dict = {}
+  for (let key of pref.listKeys()) {
+    dict[key] = pref.get(key)
+  }
+  exportData.val(JSON.stringify(dict, 1))
+})
+
+copyExportedData.on('click', () => {
+  exportedDataCopied.hide()
+
+  exportData.select()
+  document.execCommand("copy")
+
+  exportedDataCopied.show()
+})
+
+pasteDataFromClipboard.on('click', () => {
+  importData.select()
+  document.execCommand("paste")
+})
+
+proceedDataImport.on('click', () => {
+  imported.hide()
+  importErrorPanel.hide()
+
+  try {
+    const dict = JSON.parse(importData.val())
+
+    let n = 0
+
+    for (let [key, value] of Object.entries(dict)) {
+      pref.set(key, value)
+      ++n;
+    }
+
+    {
+      const report = browser.i18n.getMessage("importedNumPrefs", n)
+      imported.text(report)
+    }
+
+    imported.show()
+  }
+  catch (ex) {
+    importErrorMessage.text(ex.message)
+    importErrorPanel.show()
+  }
+})
+
+$('#page-importer').on('pagebeforeshow', () => {
+  imported.hide()
+  importErrorPanel.hide()
+  importData.val("")
 })

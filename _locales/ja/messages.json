@@ -58,5 +58,32 @@
         "example": "1"
       }
     }
+  },
+  "Export signatures": {
+    "message": "署名をエクスポート"
+  },
+  "Copy to clipboard": {
+    "message": "クリップボードにコピー"
+  },
+  "Here is an exported data you can copy:": {
+    "message": "エクスポートしたデータです。コピーして保存してください:"
+  },
+  "Copied!": {
+    "message": "コピーしました!"
+  },
+  "Import signatures": {
+    "message": "署名をインポート"
+  },
+  "Paste from clipboard": {
+    "message": "クリップボードから貼り付け"
+  },
+  "importedNumPrefs": {
+    "message": "$NUM$ 個のプリファレンスをインポートしました!",
+    "placeholders": {
+      "num": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
   }
 }
