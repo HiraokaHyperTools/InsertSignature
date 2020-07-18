@@ -65,8 +65,8 @@
   "Copy to clipboard": {
     "message": "クリップボードにコピー"
   },
-  "Here is an exported data you can copy:": {
-    "message": "エクスポートしたデータです。コピーして保存してください:"
+  "You can copy exported data:": {
+    "message": "エクスポートしたデータです:"
   },
   "Copied!": {
     "message": "コピーしました!"
@@ -85,5 +85,14 @@
         "example": "1"
       }
     }
+  },
+  "Paste exported data here:": {
+    "message": "エクスポートしたデータを貼り付けてください:"
+  },
+  "Proceed import": {
+    "message": "インポートを実行"
+  },
+  "There is an error while import.": {
+    "message": "インポート中にエラーが発生しました。"
   }
 }
