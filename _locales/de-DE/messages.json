@@ -1,0 +1,98 @@
+{
+  "extensionName": {
+    "message": "InsertSignature"
+  },
+  "extensionDescription": {
+    "message": "Signatur einfügen"
+  },
+  "actionTitle": {
+    "message": "Signatur einfügen"
+  },
+  "newSignatureLabel": {
+    "message": "Signatur #$NUM$",
+    "placeholders": {
+      "num": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
+  },
+  "importedNumPrefs": {
+    "message": "Importierte Auswahl $NUM$!",
+    "placeholders": {
+      "num": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
+  },
+  "Signature inserter": {
+    "message": "Signatur einfügen"
+  },
+  "Edit signatures": {
+    "message": "Signatur bearbeiten"
+  },
+  "Click signature to insert:": {
+    "message": "Zum Einfügen Signatur klicken:"
+  },
+  "Page Footer": {
+    "message": "Seite Fußzeile"
+  },
+  "Click signature to edit": {
+    "message": "Zum Bearbeiten Signatur klicken"
+  },
+  "Back": {
+    "message": "Zurück"
+  },
+  "Add": {
+    "message": "Hinzufügen"
+  },
+  "Signature detail": {
+    "message": "Signatur Detail"
+  },
+  "Save": {
+    "message": "Speichern"
+  },
+  "Label:": {
+    "message": "Label:"
+  },
+  "Plain text to be inserted:": {
+    "message": "Reintext zum Einfügen:"
+  },
+  "Other operations:": {
+    "message": "Andere Operationen:"
+  },
+  "Remove this": {
+    "message": "Entfernen"
+  },
+  "Import and overwrite from Windows Live Mail": {
+    "message": "Importieren und überschreiben von Windows Live Mail"
+  },
+  "Export signatures": {
+    "message": "Signaturen exportieren"
+  },
+  "Copy to clipboard": {
+    "message": "In Zwischenablage kopieren"
+  },
+  "Copied!": {
+    "message": "Kopiert!"
+  },
+  "Import signatures": {
+    "message": "Signaturen importieren"
+  },
+  "Paste from clipboard": {
+    "message": "Von Zwischenablage einfügen"
+  },
+  "You can copy exported data:": {
+    "message": "Exportierte Daten kopieren:"
+  },
+  "Paste exported data here:": {
+    "message": "Exportierte Daten hier einfügen:"
+  },
+  "Proceed import": {
+    "message": "Mit Import fortfahren"
+  },
+  "There is an error while import.": {
+    "message": "Fehler während des Imports."
+  }
+}
