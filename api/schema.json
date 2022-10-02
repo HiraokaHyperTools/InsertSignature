@@ -17,6 +17,11 @@
                 "type": "string",
                 "description": "Text to be inserted",
                 "optional": false
+              },
+              "isHTML": {
+                "type": "boolean",
+                "description": "Text is HTML or plain",
+                "optional": false
               }
             }
           }

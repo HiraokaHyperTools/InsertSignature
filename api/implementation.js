@@ -34,7 +34,12 @@ var insertSignatureApi = class extends ExtensionCommon.ExtensionAPI {
           const msgcompose = Services.wm.getMostRecentWindow("msgcompose")
           const editor = msgcompose.GetCurrentEditor()
 
-          editor.insertText(options.text)
+          if(options.isHTML) {
+            editor.insertHTML(options.text)
+          }
+          else {
+            editor.insertText(options.text)
+          }
 
           return {}
         },
