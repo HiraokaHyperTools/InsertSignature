@@ -8,6 +8,7 @@ let onSaveTemplateDetail
 let onRemoveThisTemplateDetail
 
 const titleEdit = $('#titleEdit')
+const withHTML = $('#withHTML')
 const templateEdit = $('#templateEdit')
 const templatesListView = $('#templatesListView')
 const templatesInserterListView = $('#templatesInserterListView')
@@ -37,7 +38,10 @@ function refreshTemplatesInserterListView() {
               .append(
                 $('<a>')
                   .on('click', () => {
-                    browser.insertSignatureApi.insertTextAtCurrentEditor({ text: templateValue })
+                    browser.insertSignatureApi.insertTextAtCurrentEditor({
+                      text: templateValue,
+                      isHTML: pref.get(`set.html`)=="true"
+                    })
                   })
                   .append(
                     $('<h2>').text(templateKey),
@@ -100,6 +104,8 @@ function refreshTemplatesListView() {
 
 $('#page-templates').on('pagebeforeshow', () => {
   refreshTemplatesListView()
+  withHTML.prop('checked', pref.get(`set.html`)=="true")
+  withHTML.checkboxradio("refresh");
 })
 
 function allocateNewLabel() {
@@ -135,6 +141,11 @@ $('#saveTemplateDetailBtn').on('click', () => {
 
 $('#removeThisTemplateBtn').on('click', () => {
   return onRemoveThisTemplateDetail()
+})
+
+$('#withHTML').on('click', () => {
+  pref.set(`set.html`, withHTML.prop('checked'))
+  return true
 })
 
 $('#topLoadingPanel').hide() // if errors are in above scripts, loading won't disappear.
