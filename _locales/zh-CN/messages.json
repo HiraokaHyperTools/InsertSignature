@@ -1,0 +1,101 @@
+{
+  "extensionName": {
+    "message": "InsertSignature"
+  },
+  "extensionDescription": {
+    "message": "插入签名"
+  },
+  "actionTitle": {
+    "message": "添加"
+  },
+  "newSignatureLabel": {
+    "message": "签名 #$NUM$",
+    "placeholders": {
+      "num": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
+  },
+  "importedNumPrefs": {
+    "message": "导入 $NUM$ 偏好!",
+    "placeholders": {
+      "num": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
+  },
+  "Signature inserter": {
+    "message": "插入签名"
+  },
+  "Edit signatures": {
+    "message": "编辑签名"
+  },
+  "Click signature to insert:": {
+    "message": "点击并插入签名："
+  },
+  "Page Footer": {
+    "message": "页脚"
+  },
+  "Click signature to edit": {
+    "message": "点击并编辑签名"
+  },
+  "Back": {
+    "message": "后退"
+  },
+  "Add": {
+    "message": "添加"
+  },
+  "Signature detail": {
+    "message": "签名配置"
+  },
+  "Save": {
+    "message": "保存"
+  },
+  "Label:": {
+    "message": "标签："
+  },
+  "Plain text to be inserted:": {
+    "message": "将会被插入的签名内容："
+  },
+  "Other operations:": {
+    "message": "其他操作："
+  },
+  "Remove this": {
+    "message": "删除这个"
+  },
+  "Import and overwrite from Windows Live Mail": {
+    "message": "从Windows Live Mail导入并覆盖"
+  },
+  "Export signatures": {
+    "message": "导出签名"
+  },
+  "Copy to clipboard": {
+    "message": "复制到剪切板"
+  },
+  "Copied!": {
+    "message": "以复制！"
+  },
+  "Import signatures": {
+    "message": "导入签名"
+  },
+  "Paste from clipboard": {
+    "message": "从剪切板粘贴"
+  },
+  "You can copy exported data:": {
+    "message": "您可以复制导出的数据："
+  },
+  "Paste exported data here:": {
+    "message": "将导出的数据粘贴到此处:"
+  },
+  "Proceed import": {
+    "message": "继续导入"
+  },
+  "There is an error while import.": {
+    "message": "导入时出错。"
+  },
+  "Use HTML": {
+    "message": "使用HTML"
+  }
+}
