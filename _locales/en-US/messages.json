@@ -94,5 +94,11 @@
   },
   "There is an error while import.": {
     "message": "There is an error while import."
+  },
+  "Use HTML": {
+    "message": "Paste as HTML format"
+  },
+  "Insert option:": {
+    "message": "Insert option:"
   }
 }

@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDescription__",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "applications": {
     "gecko": {
       "id": "InsertSignature@digitaldolphins.jp",
@@ -21,7 +21,6 @@
   "homepage_url": "https://github.com/HiraokaHyperTools/InsertSignature",
   "default_locale": "en-US",
   "compose_action": {
-    "default_area": "formattoolbar",
     "default_icon": {
       "64": "icons/64.png",
       "48": "icons/48.png",

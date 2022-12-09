@@ -94,5 +94,11 @@
   },
   "There is an error while import.": {
     "message": "Fehler während des Imports."
+  },
+  "Use HTML": {
+    "message": "Als HTML-Format einfügen"
+  },
+  "Insert option:": {
+    "message": "Optionen einfügen:"
   }
 }

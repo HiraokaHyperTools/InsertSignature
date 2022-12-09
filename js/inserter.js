@@ -40,7 +40,7 @@ function refreshTemplatesInserterListView() {
                   .on('click', () => {
                     browser.insertSignatureApi.insertTextAtCurrentEditor({
                       text: templateValue,
-                      isHTML: pref.get(`set.html`)=="true"
+                      isHTML: pref.get(`set.html`) == "true"
                     })
                   })
                   .append(
@@ -56,6 +56,8 @@ function refreshTemplatesInserterListView() {
 
 $('#page-top').on('pagebeforeshow', () => {
   refreshTemplatesInserterListView()
+  withHTML.prop('checked', pref.get(`set.html`) == "true")
+  withHTML.checkboxradio("refresh");
 })
 
 function refreshTemplatesListView() {
@@ -104,8 +106,6 @@ function refreshTemplatesListView() {
 
 $('#page-templates').on('pagebeforeshow', () => {
   refreshTemplatesListView()
-  withHTML.prop('checked', pref.get(`set.html`)=="true")
-  withHTML.checkboxradio("refresh");
 })
 
 function allocateNewLabel() {

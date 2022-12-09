@@ -94,5 +94,11 @@
   },
   "There is an error while import.": {
     "message": "インポート中にエラーが発生しました。"
+  },
+  "Use HTML": {
+    "message": "HTML 形式として貼り付け"
+  },
+  "Insert option:": {
+    "message": "オプション:"
   }
 }
