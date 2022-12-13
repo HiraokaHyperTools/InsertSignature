@@ -1,3 +1,7 @@
+## Changes in 0.4.1:
+
+- Fix packaging bug
+
 ## Changes in 0.4.0:
 
 - Added _Paste as HTML format_ option.

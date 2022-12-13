@@ -33,6 +33,9 @@ def pack(c):
     xpi_name = Template(XPI).substitute(version=version)
     xpi_path = os.path.join(base_dir, xpi_name)
 
+    if os.path.exists(xpi_path):
+        os.unlink(xpi_path)
+
     t = Template(
         "7z.exe a \"${xpi_path}\" *.* -x!*.py -x!*.xpi -x!.git -x!*.pxf -x!*.dxf -x!screenshots -x!.vscode -x!.editorconfig -x!.gitignore -x!dev.md -x!.gitattributes -r"
     )
