@@ -1,6 +1,8 @@
 var insertSignatureApi = class extends ExtensionCommon.ExtensionAPI {
   getAPI(context) {
-    const { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm")
+    const Services = globalThis.Services || ChromeUtils.import(
+      "resource://gre/modules/Services.jsm"
+    ).Services
     // See: https://developer.mozilla.org/en/docs/Mozilla/Tech/XPCOM/Accessing_the_Windows_Registry_Using_XPCOM
 
     const wrkGenerator = () => (
