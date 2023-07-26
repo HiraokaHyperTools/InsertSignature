@@ -1,3 +1,12 @@
+## Changes in 0.4.3:
+
+- Removed Experiments requirement.
+- Removed import option from Windows Live Mail.
+
+## Changes in 0.4.2:
+
+- In techically, changed how to insert text or HTML template into composition window.
+
 ## Changes in 0.4.1:
 
 - Fix packaging bug

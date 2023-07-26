@@ -164,15 +164,6 @@ $('[data-trans]').each((index, element) => {
   }
 })
 
-$("#importFromWindowsLiveMailBtn").on('click', async () => {
-  const list = await browser.insertSignatureApi.importSignatureFromWindowsLiveMail()
-  for (let { name, text } of list) {
-    pref2.setTemplate(name, text)
-  }
-
-  refreshTemplatesListView()
-})
-
 $('#page-exporter').on('pagebeforeshow', () => {
   exportedDataCopied.hide()
 
