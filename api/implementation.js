@@ -31,21 +31,6 @@ var insertSignatureApi = class extends ExtensionCommon.ExtensionAPI {
     return {
       insertSignatureApi: {
         // test:
-        // await browser.insertSignatureApi.insertTextAtCurrentEditor({text:"hello"})
-        async insertTextAtCurrentEditor(options) {
-          const msgcompose = Services.wm.getMostRecentWindow("msgcompose")
-          const editor = msgcompose.GetCurrentEditor()
-
-          if(options.isHTML) {
-            editor.insertHTML(options.text)
-          }
-          else {
-            editor.insertText(options.text)
-          }
-
-          return {}
-        },
-        // test:
         // await browser.insertSignatureApi.importSignatureFromWindowsLiveMail()
         async importSignatureFromWindowsLiveMail() {
           const wrk = wrkGenerator()

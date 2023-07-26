@@ -37,8 +37,9 @@ function refreshTemplatesInserterListView() {
             return $('<li>')
               .append(
                 $('<a>')
-                  .on('click', () => {
-                    browser.insertSignatureApi.insertTextAtCurrentEditor({
+                  .on('click', async () => {
+                    let [composeTab] = await browser.tabs.query({currentWindow: true, type: "messageCompose"})
+                    await browser.tabs.sendMessage(composeTab.id, {
                       text: templateValue,
                       isHTML: pref.get(`set.html`) == "true"
                     })
