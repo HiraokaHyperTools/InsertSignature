@@ -1,3 +1,7 @@
+## Changes in 0.4.4 0.4.5:
+
+- Remove `strict_max_version` specification from manifest.
+
 ## Changes in 0.4.3:
 
 - Removed Experiments requirement.
